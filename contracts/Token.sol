@@ -4,7 +4,7 @@
 pragma solidity ^0.8.9;
 
 contract Token {
-    //type variable to identify the token
+    //string variables to identify the token
     string public name = "Sample Hardhat Token";
     string public symbol = "SHT";
 
@@ -27,6 +27,7 @@ contract Token {
         //assign totalSupply to the account deploying the contract
         balances[msg.sender] = totalSupply;
         owner = msg.sender;
+    
     }
 
     /**
@@ -39,8 +40,9 @@ contract Token {
         require(balances[msg.sender] >= amount, "Not enough tokens");
 
         //transfer the amount
-        balances[to] += amount;
         balances[msg.sender] -= amount;
+        balances[to] += amount;
+        
 
         //notify off-chain apps of the transfer
         emit Transfer(msg.sender, to, amount);
@@ -52,7 +54,7 @@ contract Token {
         * the `view` modifier indicates that it doesn't modify the state of the contract: can be called without triggering a transaction
         */
 
-        function balanceOf(address account) external view returns (uint256) {
+        function balanceOf (address account) external view returns (uint256) {
             return balances[account];
         }
         
