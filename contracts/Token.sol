@@ -3,6 +3,8 @@
 //solidity version
 pragma solidity ^0.8.9;
 
+import "hardhat/console.sol";
+
 contract Token {
     //string variables to identify the token
     string public name = "Sample Hardhat Token";
@@ -38,6 +40,8 @@ contract Token {
      function transfer(address to, uint256 amount) external {
         //check if the sender has enough tokens. If false, transaction reverts
         require(balances[msg.sender] >= amount, "Not enough tokens");
+
+        console.log("Transferring from %s to %s %s tokens", msg.sender, to, amount);
 
         //transfer the amount
         balances[msg.sender] -= amount;
